@@ -48,10 +48,19 @@ class _MyAppState extends State<MyApp> {
 
   Future<bool> readPermissionsForHealthKit() async {
     try {
-      final responses = await HealthKit.hasPermissions([DataType.STEP_COUNT]);
-
+      final responses = await HealthKit.hasPermissions([DataType.STEP_COUNT,DataType.ENERGY,
+          DataType.WATER,
+          DataType.WEIGHT,
+          DataType.DISTANCE,]);
+      
       if (!responses) {
-        final value = await HealthKit.requestPermissions([DataType.STEP_COUNT]);
+        final value = await HealthKit.requestPermissions([
+          DataType.STEP_COUNT, 
+          DataType.ENERGY,
+          DataType.WATER,
+          DataType.WEIGHT,
+          DataType.DISTANCE,
+          ]);
 
         return value;
       } else {
